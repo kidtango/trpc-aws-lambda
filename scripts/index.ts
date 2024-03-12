@@ -61,6 +61,7 @@ const commands = [
   'start-local-api',
   'build-api-package',
   'publish-api-package',
+  'cdk-destroy',
 ] as const;
 export type Command = (typeof commands)[number];
 
@@ -81,6 +82,9 @@ const argv = yargs(hideBin(process.argv))
       break;
     case 'cdk-deploy':
       await cdkCommand('deploy');
+      break;
+    case 'cdk-destroy':
+      await cdkCommand('destroy');
       break;
     case 'cdk-hotswap':
       await cdkCommand('hotswap');
@@ -108,13 +112,14 @@ const argv = yargs(hideBin(process.argv))
   }
 })();
 
-async function cdkCommand(command: 'diff' | 'deploy' | 'hotswap') {
+async function cdkCommand(command: 'diff' | 'deploy' | 'hotswap' | 'destroy') {
   let extraArgs = '';
   if (command === 'deploy' || command === 'hotswap') extraArgs = '--require-approval never';
   if (command === 'hotswap') {
     command = 'deploy';
     extraArgs += ' --hotswap';
   }
+  if (command === 'destroy') extraArgs += ' --force';
 
   await runCommand('cdk', `${command} "**" --profile ${ENVIRONMENT.profile} ${extraArgs}`, {
     cwd: paths.workingDir,

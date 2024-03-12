@@ -33,8 +33,8 @@ export type TestVariables = {
 
 export const ENVIRONMENT: EnvironmentConfig = {
   region: 'us-east-1',
-  account: '581184285249',
-  profile: 'rehan-demo-exported',
+  profile: 'personal',
+  account: '744773277093',
 } as const;
 
 export const API_ENV: ApiEnv = {

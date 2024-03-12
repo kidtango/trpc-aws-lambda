@@ -4,11 +4,13 @@
   "description": "",
   "scripts": {
     "build": "tsc",
+    "cdk": "cdk",
     "lint": "eslint './**/*.ts' --ignore-pattern '**/*.d.ts' --quiet",
     "lint-fix": "eslint '**/*.ts' --ignore-pattern '**/*.d.ts' --fix",
     "build-src": "wireit",
     "cdk-diff": "wireit",
     "cdk-deploy": "wireit",
+    "cdk-destroy": "wireit",
     "cdk-hotswap": "wireit",
     "start-local-api": "wireit",
     "start-local-api-watch": "npm-watch start-local-api",
@@ -39,6 +41,9 @@
       "dependencies": [
         "build-src"
       ]
+    },
+    "cdk-destroy": {
+      "command": "esr ./scripts/index.ts -c cdk-destroy"
     },
     "cdk-diff": {
       "command": "esr ./scripts/index.ts -c cdk-diff",
@@ -88,6 +93,7 @@
     "axios": "^1.4.0",
     "constructs": "^10.2.69",
     "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
     "esbuild": "^0.19.0",
     "esbuild-runner": "^2.2.2",
     "eslint-config-prettier": "^9.0.0",
