@@ -1,3 +1,5 @@
+import 'dotenv/config';
+
 import { ApiEnv } from '@backend/lambda/api/environment';
 
 /** The AWS Environment details */
@@ -32,9 +34,9 @@ export type TestVariables = {
 };
 
 export const ENVIRONMENT: EnvironmentConfig = {
-  region: 'us-east-1',
-  profile: 'personal',
-  account: '744773277093',
+  region: process.env.region || 'us-east-1',
+  profile: process.env.AWS_PROFILE || '',
+  account: process.env.account || '',
 } as const;
 
 export const API_ENV: ApiEnv = {
